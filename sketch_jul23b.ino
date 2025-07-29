@@ -11,24 +11,21 @@
 #define blue_B 9
 
 using namespace std;
-void Bluebutton(int x);
-
+int buttonState = 0;  // variable for reading the pushbutton status
 
 void setup() {
-  // put your setup code here, to run once:
-	pinMode(blue,OUTPUT);
-	pinMode(blue_B,INPUT);
+  // initialize the LED pin as an output:
+  pinMode(blue, OUTPUT);
+  // initialize the pushbutton pin as an input:
+  pinMode(blue_B, INPUT);
 }
 
-void loop() {// Reading temperature or humidity takes about 250 milliseconds!
-  // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
-  
-}
+void loop() {
+  // read the state of the pushbutton value:
+  blue_B = digitalRead(blue_B);
 
-void Bluebutton(int x)
-{
-	
-  if (x == HIGH) {
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (blue_B == HIGH) {
     // turn LED on:
     digitalWrite(blue, HIGH);
   } else {
