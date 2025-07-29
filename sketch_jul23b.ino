@@ -7,29 +7,26 @@
 //Class:DCEP/FT/1A/04
 
 //The temperature and humidity senor are used to moniter the plant and depending on it, the led green will be shown, if water is not needed, and, led red will be shown if water is needed.
-#define blue 6
-#define blue_B 9
-
-using namespace std;
-int buttonState = 0;  // variable for reading the pushbutton status
+#define BLUE_LED 6
+#define BLUE_BUTTON 9
+void Bluebutton();
 
 void setup() {
-  // initialize the LED pin as an output:
-  pinMode(blue, OUTPUT);
-  // initialize the pushbutton pin as an input:
-  pinMode(blue_B, INPUT);
+  pinMode(BLUE_LED, OUTPUT);
+  pinMode(BLUE_BUTTON, INPUT);
 }
 
 void loop() {
-  // read the state of the pushbutton value:
-  blue_B = digitalRead(blue_B);
+  Bluebutton();
+}
 
-  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
-  if (blue_B == HIGH) {
-    // turn LED on:
-    digitalWrite(blue, HIGH);
+// Function to check button and control LED
+void Bluebutton() {
+  int buttonState = digitalRead(BLUE_BUTTON);
+  
+  if (buttonState == HIGH) {
+    digitalWrite(BLUE_LED, HIGH); // LED ON
   } else {
-    // turn LED off:
-    digitalWrite(blue, LOW);
+    digitalWrite(BLUE_LED, LOW);  // LED OFF
   }
 }
