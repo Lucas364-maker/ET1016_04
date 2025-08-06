@@ -64,12 +64,13 @@ void loop() {
 void checkLight() {
   int lightVal = analogRead(LDR_SENSOR);
   float lightPercent = (lightVal / 1023.0) * 100;
+  double limit=75.0;
 
   Serial.print("Light: ");
   Serial.print(lightPercent);
   Serial.println(" %");
 
-  if (lightPercent < 75.0) {
+  if (lightPercent < limit) {
     
     digitalWrite(YELLOW_LED, HIGH);
     digitalWrite(YELLOW_LED, HIGH);
@@ -93,12 +94,12 @@ void checkLight() {
 void checkHumidity() {
   int humidityVal = analogRead(HUMIDITY_SENSOR);
   float humidityPercent = (humidityVal / 1023.0) * 100;
-
+double threhold=48.0;
   Serial.print("Humidity: ");
   Serial.print(humidityPercent);
   Serial.println(" %");
 
-   if (humidityPercent < 48.0) {
+   if (humidityPercent < threhold) {
     digitalWrite(BLUE_LED, LOW);
     digitalWrite(RED_LED, HIGH);
  digitalWrite(GREEN_LED, LOW);
