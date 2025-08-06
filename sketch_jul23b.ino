@@ -15,7 +15,7 @@
 #define KNOB_PIN A0
 #define CLK 10     // CLK of TM1637
 #define DIO 11     // DIO of TM1637
-#define BUTTON_PIN 9
+#define BUTTON_PIN 8
 #define BLUE_LED 6
 #define RED_LED 4
 
