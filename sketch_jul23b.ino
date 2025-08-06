@@ -17,6 +17,7 @@
 #define DIO 11     // DIO of TM1637
 #define BUTTON_PIN 9
 #define BLUE_LED 6
+#define RED_LED 4
 
 Knob knob(KNOB_PIN);
 TM1637 disp(CLK, DIO);
@@ -42,6 +43,7 @@ void setup() {
   pinMode(GREEN_LED, OUTPUT);
   pinMode(BLUE_LED, OUTPUT);
   pinMode(BUZZER, OUTPUT);
+   pinMode(RED_LED, OUTPUT);
  Serial.begin(9600);
   disp.init();
   disp.set(7); // Brightness (0–7)
@@ -70,12 +72,13 @@ void checkLight() {
   if (lightPercent < 75.0) {
     
     digitalWrite(YELLOW_LED, HIGH);
+    digitalWrite(YELLOW_LED, HIGH);
     buz.playTone(1000, 200); 
   delay(300);              
-
-  
+   
+  for(int i=0;i<10;i++)
   buz.playTone(1200, 200);
-  delay(1000);   
+  delay(100);   
     delay(100);
     digitalWrite(YELLOW_LED, LOW);
   } else {
@@ -95,15 +98,17 @@ void checkHumidity() {
   Serial.print(humidityPercent);
   Serial.println(" %");
 
-  if (humidityPercent < 70.0) {
+   if (humidityPercent < 48.0) {
     digitalWrite(BLUE_LED, LOW);
-    digitalWrite(GREEN_LED, LOW);
+    digitalWrite(RED_LED, HIGH);
+ digitalWrite(GREEN_LED, LOW);
  waterplant();
   } else {
     digitalWrite(BLUE_LED, LOW);
-   
+   digitalWrite(RED_LED, LOW);
     digitalWrite(GREEN_LED, HIGH);
   }
+
 
   delay(500);
   
