@@ -37,6 +37,29 @@ unsigned long debounceDelay = 80;
 #include <Wire.h>
 #include "RichShieldPassiveBuzzer.h"
 
+int melody[] = {
+  659, 659, 659,  // E E E
+  659, 659, 659,  // E E E
+  659, 783, 523, 587, 659 // E G C D E
+};
+
+int noteDurations[] = {
+  200, 200, 400,
+  200, 200, 400,
+  200, 200, 200, 200, 600
+};
+
+int totalNotes = sizeof(melody) / sizeof(melody[0]);
+// -------------------------------------------------------------
+
+void playChristmasTune() {
+  for (int i = 0; i < totalNotes; i++) {
+    buz.playTone(melody[i], noteDurations[i]);
+    delay(50); // Small pause between notes
+  }
+}
+
+
 PassiveBuzzer buz(BUZZER);
 void waterplant();
 void setup() {
@@ -168,20 +191,4 @@ void waterplant()
   delay(500); // Small delay for display update
 }
 
-void playChristmasTune() {
-  // Frequencies for "Jingle Bells" (part of the melody)
-  int melody[] = {
-    659, 659, 659, // E E E
-    659, 659, 659, // E E E
-    659, 783, 523, 587, 659 // E G C D E
-  };
 
-  int noteDurations[] = {
-    200, 200, 400,
-    200, 200, 400,
-    200, 200, 200, 200, 600
-  }; for (int i = 0; i < 11; i++) {
-    buz.playTone(melody[i], noteDurations[i]);
-    delay(50); // Short pause between notes
-  }
-}
