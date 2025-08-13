@@ -63,28 +63,40 @@ void loop() {
 
 
 void checkLight() {
-  int lightVal = analogRead(LDR_SENSOR);
+ float lightArray[5];
+int readingIndex = 0;
+int readingCount = 0;
+ int lightVal = analogRead(LDR_SENSOR);
   float lightPercent = (lightVal / 1023.0) * 100;
-  double limit=75.0;
+  double limit = 75.0;
 
-  Serial.print("Light: ");
-  Serial.print(lightPercent);
+
+  lightArray[readingIndex] = lightPercent;
+  readingIndex = (readingIndex + 1) % 5;
+  if (readingCount < 5) readingCount++;
+
+ 
+  float sum = 0;
+  for (int i = 0; i < readingCount; i++) {
+    sum += lightArray[i];
+  }
+  float avgLight = sum / readingCount;
+
+  
+  Serial.print(" % | Avg Light: ");
+  Serial.print(avgLight);
   Serial.println(" %");
 
-  if (lightPercent < limit) {
-    
-    digitalWrite(YELLOW_LED, HIGH);
+ 
+  if (avgLight < limit) {
     digitalWrite(YELLOW_LED, HIGH);
     buz.playTone(1000, 200); 
-  delay(300);              
-   
-  for(int i=0;i<10;i++)
-  buz.playTone(1200, 200);
-  delay(100);   
-    delay(100);
+    delay(300);              
+    for (int i = 0; i < 10; i++)
+      buz.playTone(1200, 200);
+    delay(100);   
     digitalWrite(YELLOW_LED, LOW);
   } else {
-    
     digitalWrite(YELLOW_LED, HIGH);
     digitalWrite(BUZZER, LOW);
     delay(1000);
