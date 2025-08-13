@@ -50,15 +50,6 @@ int noteDurations[] = {
 };
 
 int totalNotes = sizeof(melody) / sizeof(melody[0]);
-// -------------------------------------------------------------
-
-void playChristmasTune() {
-  for (int i = 0; i < totalNotes; i++) {
-    buz.playTone(melody[i], noteDurations[i]);
-    delay(50); // Small pause between notes
-  }
-}
-
 
 PassiveBuzzer buz(BUZZER);
 void waterplant();
@@ -189,6 +180,18 @@ void waterplant()
   }
 
   delay(500); // Small delay for display update
+}
+
+
+
+
+// -------------------------------------------------------------
+
+void playChristmasTune() {
+  for (int i = 0; i < totalNotes; i++) {
+    buz.playTone(melody[i], noteDurations[i]);
+    delay(50); // Small pause between notes
+  }
 }
 
 
