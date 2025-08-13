@@ -157,6 +157,7 @@ void waterplant()
       digitalWrite(BLUE_LED, LOW);
       delay(300);
     }
+     playChristmasTune();
   }
 
   // Reset buttonPressed flag after button is released
@@ -165,4 +166,22 @@ void waterplant()
   }
 
   delay(500); // Small delay for display update
+}
+
+void playChristmasTune() {
+  // Frequencies for "Jingle Bells" (part of the melody)
+  int melody[] = {
+    659, 659, 659, // E E E
+    659, 659, 659, // E E E
+    659, 783, 523, 587, 659 // E G C D E
+  };
+
+  int noteDurations[] = {
+    200, 200, 400,
+    200, 200, 400,
+    200, 200, 200, 200, 600
+  }; for (int i = 0; i < 11; i++) {
+    buz.playTone(melody[i], noteDurations[i]);
+    delay(50); // Short pause between notes
+  }
 }
